@@ -2,7 +2,6 @@ import React, { Component,useState } from 'react';
 import { useForm } from "react-hook-form";
 
 async function fetchDataJSON() {
-    
     const response = await fetch('https://api.exchangeratesapi.io/latest');
     const data = await response.json();
     const theRates = data.rates
@@ -12,15 +11,7 @@ async function fetchDataJSON() {
         arrayOfRates.push(obj)
     }
     console.log("arrayOfRates:",arrayOfRates) 
-    //ratesArray = arrayOfRates
-
-return arrayOfRates
-    // //let planets = this.props.state.planets;
-    // var optionItems =  arrayOfRates.map((obj) =>
-    //     `<option key=${obj.key}>${obj.value}</option>`
-    // );
-    // console.log("optionItesm: ",optionItems)
-    // return optionItems
+    return arrayOfRates
 }
   
 function Exchange(){
@@ -28,30 +19,23 @@ function Exchange(){
     const onSubmit = formdata => console.log(formdata);
     console.log(watch("currency1")); 
   
-    const [ratesLoaded,setRatesLoaded] = useState(false)
+    var [ratesLoaded,setRatesLoaded] = useState(false)
     var [ratesArray, setRatesArray] = useState([])
     var [optionItems, setOptionItems] = useState("")
-    
-     
-     
-      const rates_stored = localStorage.getItem("rates")
-      if(!rates_stored){
-        fetchDataJSON().then(data => {
-            //movies; // fetched movies
-            console.log("data:",data)
-            //setOptionItems = data
-            var options =  data.map((obj) =>
-            <option key={obj.value}>{obj.key}</option>
-             );
-             setOptionItems(options)
-             localStorage.setItem("rates_stored",JSON.stringify(data))
-          });
-      }
-     
-  
- 
-   
-    
+    const rates_stored = localStorage.getItem("rates")
+    if(!ratesLoaded){
+    fetchDataJSON().then(data => {
+        console.log("data:",data)
+
+        var options =  data.map((obj) =>
+        <option key={obj.value}>{obj.key}</option>
+            );
+            setOptionItems(options)
+            localStorage.setItem("rates_stored",JSON.stringify(data))
+            
+        });
+        setRatesLoaded(true);
+    }
     return (
         <div>
             
