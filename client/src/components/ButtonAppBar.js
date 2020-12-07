@@ -32,7 +32,7 @@ export default function ButtonAppBar(props) {
           <Typography variant="h6" className={classes.title}>
             {title}
           </Typography>
-          <Button color="inherit">Login</Button>
+          {/** <Button color="inherit">Login</Button> */}
         </Toolbar>
       </AppBar>
     </div>
