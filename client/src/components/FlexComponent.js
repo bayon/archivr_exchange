@@ -1,6 +1,6 @@
 
 import React from 'react';
-
+//thanks to : https://medium.com/better-programming/make-a-flexbox-react-component-e96a038da7ec
 export const Flex = (props) => (
     <div
       className={props.className}

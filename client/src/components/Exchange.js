@@ -1,10 +1,13 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import { Flex } from './FlexComponent';
+
+import Compare from './Compare'; 
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,8 +64,11 @@ function compareExchangeRates(a, b) {
 function Exchange() {
   const classes = useStyles();
 
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit,   errors } = useForm();
   const [finalAmount, setFinalAmount] = useState(0);
+  const [fromSymbol,setFromSymbol] = useState("")
+  const [toSymbol,setToSymbol] = useState("")
+
 
   const onSubmit = (formdata) => {
     console.log(formdata);
@@ -72,6 +78,15 @@ function Exchange() {
     const exchangeRate = currTo / currFrom;
     const this_final = amount * exchangeRate;
     setFinalAmount(this_final);
+
+    const sel1 = document.getElementById("currencyFrom"); 
+    let fromSymbol = sel1.options[sel1.selectedIndex].text;
+    setFromSymbol(fromSymbol)
+    const sel2 = document.getElementById("currencyTo"); 
+    let toSymbol = sel2.options[sel2.selectedIndex].text;
+    setToSymbol(toSymbol)
+
+
   };
 
   var [ratesLoaded, setRatesLoaded] = useState(false);
@@ -107,14 +122,14 @@ function Exchange() {
             </FormSection>
             <FormSection>
               <FormLabel>From:</FormLabel>
-              <select name="currencyFrom" ref={register}>
+              <select name="currencyFrom" id="currencyFrom" ref={register}>
                 {optionItems}
               </select>
             </FormSection>
 
             <FormSection>
               <FormLabel>To:</FormLabel>
-              <select name="currencyTo" ref={register}>
+              <select name="currencyTo" id="currencyTo" ref={register}>
                 {optionItems}
               </select>
             </FormSection>
@@ -132,6 +147,8 @@ function Exchange() {
           </Flex>
         </form>
       </Paper>
+      <Compare from={fromSymbol} to={toSymbol}/>
+
     </Grid>
   );
 }

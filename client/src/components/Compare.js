@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, {  useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -26,11 +26,14 @@ const FormSection = styled.section`
   margin: 15px;
 `;
 
-async function fetchDataJSON() {
+async function fetchDataJSON(merged) {
+  console.log("mergedData in async fetch ?",merged)
   const response = await fetch(
-    'https://api.exchangeratesapi.io/latest?base=USD'
+    `https://api.exchangeratesapi.io/history?start_at=${merged.start}&end_at=${merged.end}&symbols=${merged.to},${merged.from}&base=USD`
   );
-  const data = await response.json();
+   const data = await response.json();
+  console.log("data from compare:",data);
+
   const theRates = data.rates;
   var arrayOfRates = [];
   for (const [key, value] of Object.entries(theRates)) {
@@ -58,39 +61,41 @@ function compareExchangeRates(a, b) {
 
 
 
-function Compare() {
+function Compare(props) {
   const classes = useStyles();
 
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit,  errors } = useForm();
   const [finalAmount, setFinalAmount] = useState(0);
+  var [from,setFrom] = useState("")
+  var [to,setTo] = useState("")
+  console.log("...- - compare props:",props)
+
+  //setFrom(props.from);
+  //setTo(props.to);
+
 
   const onSubmit = (formdata) => {
+    console.log("onSubmit - - - - - - -")
     console.log(formdata);
-     const amount = parseFloat(formdata.amount1);
-    const currFrom = parseFloat(formdata.currencyFrom);
-    const currTo = parseFloat(formdata.currencyTo);
-    const exchangeRate = currTo / currFrom;
-    const this_final = amount * exchangeRate;
-    setFinalAmount(this_final);
+    console.log(props)
+    let merged = {...formdata,...props}
+    if (!compareRatesLoaded) {
+      fetchDataJSON(merged).then((data) => {
+        console.log(' comparison data:', data);
+       // console.log("compare props from state:",from,to)
+       // console.log('merged:',merged)
+        
+       
+        localStorage.setItem('compare_rates_stored', JSON.stringify(data));
+      });
+      setCompareRatesLoaded(true);
+    }
   };
 
-  var [ratesLoaded, setRatesLoaded] = useState(false);
+  var [compareRatesLoaded, setCompareRatesLoaded] = useState(false);
   var [optionItems, setOptionItems] = useState('');
   const rates_stored = localStorage.getItem('rates');
-  if (!ratesLoaded) {
-    fetchDataJSON().then((data) => {
-      console.log('data:', data);
-     
-      var options = data.map((obj) => (
-        <option key={obj.value} value={obj.value}>
-          {obj.key}
-        </option>
-      ));
-      setOptionItems(options);
-      localStorage.setItem('rates_stored', JSON.stringify(data));
-    });
-    setRatesLoaded(true);
-  }
+  
   return (
     <Grid item xs={12} sm={12}>
       <Paper className={classes.paper}>
@@ -101,25 +106,18 @@ function Compare() {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <Flex container justifyContent="space-between" width="300px">
-            <FormSection>
-              <FormLabel>Amount:</FormLabel>
-              <input name="amount1" placeholder="amount" ref={register} />
-            </FormSection>
+            
             <FormSection>
               <FormLabel>From:</FormLabel>
-              <select name="currencyFrom" ref={register}>
-                {optionItems}
-              </select>
+              <input type="date" name="start" ref={register}></input>
             </FormSection>
 
             <FormSection>
               <FormLabel>To:</FormLabel>
-              <select name="currencyTo" ref={register}>
-                {optionItems}
-              </select>
+              <input type="date" name="end" ref={register} ></input>
             </FormSection>
             <FormSection>
-              <FormLabel>Convert:</FormLabel>
+              <FormLabel>Compare:</FormLabel>
               <input type="submit" value=">"></input>
             </FormSection>
             <FormSection>
@@ -136,4 +134,4 @@ function Compare() {
   );
 }
 
-export default Exchange;
+export default Compare;
