@@ -1,3 +1,19 @@
+//================================================================================================================
+
+Arcivr Coding Exercise:
+
+Create a simple web application for performing currency conversions.  Your app should allow the user to select two 
+currencies, enter an amount in one of the currencies, and see what the value would be in the other currency.  
+For example, I should be able to choose USD and GBP, enter 100 for USD, and see a conversion value like 114.21 GBP
+As a bonus, it would be nice if the user could see a historical view of the chosen exchange rate.  That could be in 
+the form of a chart, or a table, or whatever you prefer.
+You can use one of the many publicly available APIs to look up the exchange rates.  (https://exchangeratesapi.io 
+and https://fixer.io are both good options.)
+Please use React to build the UI.  Other than that, feel free to use any libraries & tools that you like.
+
+//================================================================================================================
+
+app and api in docker container: 
 reference: https://github.com/mrcoles/node-react-docker-compose
 
 
