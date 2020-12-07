@@ -1,6 +1,7 @@
 import React, { Component ,useState} from 'react';
 import ButtonAppBar from './ButtonAppBar'
 import Exchange from './Exchange'; 
+//import Compare from './Compare'; 
 
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
        <ButtonAppBar title="exchange"/>
          
         <Exchange />
-
+        
         
       
             

@@ -58,7 +58,7 @@ function compareExchangeRates(a, b) {
 
 
 
-function Exchange() {
+function Compare() {
   const classes = useStyles();
 
   const { register, handleSubmit, watch, errors } = useForm();

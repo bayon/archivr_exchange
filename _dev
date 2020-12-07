@@ -32,3 +32,5 @@ GET https://api.exchangeratesapi.io/latest?base=USD HTTP/1.1
 // UPDATE NPM PACKAGES: 
 docker exec -it <container> /bin/bash  THEN run npm update from inside the container. 
 
+// exchange rate history: last month
+ https://api.exchangeratesapi.io/history?start_at=2020-11-01&end_at=2020-12-01&symbols=USD,CAD&base=USD
