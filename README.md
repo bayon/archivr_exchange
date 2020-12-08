@@ -22,12 +22,11 @@ app and api in docker container:
 reference: https://github.com/mrcoles/node-react-docker-compose
 
 
-//======================
-To calculate how much of a foreign currency you’ll get with a particular exchange rate, 
-divide the amount of money you’re starting with by the exchange rate. 
+ 
 
 
 //======================
+
 Rates are quoted against the Euro by default. 
 Quote against a different currency by setting the base parameter in your request.
 GET https://api.exchangeratesapi.io/latest?base=USD HTTP/1.1 
@@ -35,6 +34,7 @@ GET https://api.exchangeratesapi.io/latest?base=USD HTTP/1.1
 
 
 // UPDATE NPM PACKAGES: 
+
 run npm install on the app container after running docker-compose up 
  
 
