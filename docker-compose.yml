@@ -14,6 +14,7 @@ services:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
   client:
+    stdin_open: true 
     build:
       context: ./client/
     command: npm start
