@@ -25,14 +25,22 @@ function ExchangeChart(props) {
       {
         label: _curr1,
         data: _dataset1,
+        backgroundColor: [
+          'rgba(255,99,132, 0.5)',
+        ]
       },
       {
         label: _curr2,
         data: _dataset2,
+        backgroundColor: [
+          'rgba(155,99,132, 0.5)',
+        ]
       },
-    ],
+    ]
+
   };
   console.log("Exchange Chart props...............:",props)
+  //empty on load, then gets filled, then on second round is empty. 
   return (
     <div className="chart">
       <Line
