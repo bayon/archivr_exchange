@@ -4,15 +4,15 @@ import ReactDOM from "react-dom";
 import { Chart } from "react-charts";
 
 import useDemoConfig from "./useDemoConfig";
-import useLagRadar from "./useLagRadar";
+//import useLagRadar from "./useLagRadar";
 import ResizableBox from "./ResizableBox";
 import "./styles.css";
 
  function MegaChart() {
-  useLagRadar();
+  //useLagRadar();
 
   let { data, randomizeData } = useDemoConfig({
-    series: 10,
+    series: 2,
   });
 
   data = React.useMemo(
@@ -33,6 +33,7 @@ import "./styles.css";
             }
       ),
     [data]
+    
   );
 
   const series = React.useMemo(

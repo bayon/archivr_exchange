@@ -90,7 +90,7 @@ export default function useChartConfig({
   React.useEffect(() => {
     setState(old => ({
       ...old,
-      data: makeDataFrom(dataType, series, useR, datums)
+      data: hardcoded_data() //makeDataFrom(dataType, series, useR, datums)
     }));
   }, [count, dataType, datums, series, useR]);
 
@@ -99,7 +99,7 @@ export default function useChartConfig({
       ...old,
       data: makeDataFrom(dataType, series, useR, datums)
     }));
-
+//data: makeDataFrom(dataType, series, useR, datums)
   const Options = optionKeys
     .filter(option => show.indexOf(option) > -1)
     .map(option => (
@@ -133,7 +133,13 @@ export default function useChartConfig({
     Options
   };
 }
-
+function hardcoded_data(){
+  //data: [{x:'2016-12-25', y:20}, {x:'2016-12-26', y:10}]
+ // const dataobject = [{x:'2016-12-25', y:20}, {x:'2016-12-26', y:10}]
+  const dataobject = [{data: [{x:'2020-12-25', y:20}, {x:'20120-12-26', y:10}]}]
+  console.log("dataobject:",dataobject)
+  return dataobject;
+}
 function makeDataFrom(dataType, series, useR, datums) {
   return [
     ...new Array(series || Math.max(Math.round(Math.random() * 5), 1))
@@ -186,6 +192,8 @@ function makeSeries(i, dataType, useR, datums) {
         secondary: y,
         radius: r
       };
+      //console.log("data:",data)
     })
+   
   };
 }

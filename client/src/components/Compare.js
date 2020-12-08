@@ -5,9 +5,11 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import { Flex } from './FlexComponent';
-import MyChart from './MyChart'; 
+//import MyChart from './MyChart'; 
 // import MultipleAxes from './MultipleAxes';
 import MegaChart from './megachart/MegaChart'
+// import SimpleChart from './SimpleChart';
+import BarChart from './BarChart';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -132,8 +134,10 @@ function Compare(props) {
             </FormSection>
           </Flex>
         </form>
-        <MyChart></MyChart>
+        
        <MegaChart></MegaChart>
+       {/* <SimpleChart></SimpleChart> */}
+       <BarChart></BarChart>
       </Paper>
     </Grid>
   );
