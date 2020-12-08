@@ -8,7 +8,6 @@ import { Flex } from './FlexComponent';
 
 import Compare from './Compare'; 
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -148,7 +147,7 @@ function Exchange() {
         </form>
       </Paper>
       <Compare from={fromSymbol} to={toSymbol}/>
-
+     
     </Grid>
   );
 }
