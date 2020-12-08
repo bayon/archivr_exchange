@@ -61,7 +61,7 @@ function compareExchangeRates(a, b) {
 function Exchange() {
   const classes = useStyles();
 
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm({mode: 'onBlur'});
   const [finalAmount, setFinalAmount] = useState(0);
   const [fromSymbol, setFromSymbol] = useState('');
   const [toSymbol, setToSymbol] = useState('');
@@ -81,6 +81,7 @@ function Exchange() {
     const sel2 = document.getElementById('currencyTo');
     let toSymbol = sel2.options[sel2.selectedIndex].text;
     setToSymbol(toSymbol);
+    console.log("ERRORS:",errors)
   };
 
   var [ratesLoaded, setRatesLoaded] = useState(false);
@@ -112,7 +113,8 @@ function Exchange() {
           <Flex container justifyContent="space-between" width="300px">
             <FormSection>
               <FormLabel>Amount:</FormLabel>
-              <input name="amount1" placeholder="amount" ref={register} />
+              <input name="amount1" placeholder="amount"  ref={register({required: true, pattern: /^[0-9]+$/})}  />
+              {errors.amount1 && 'This number is required '}
             </FormSection>
             <FormSection>
               <FormLabel>From:</FormLabel>

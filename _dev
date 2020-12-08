@@ -38,3 +38,17 @@ docker exec -it <container> /bin/bash  THEN run npm update from inside the conta
 
 //charts: 
 https://www.chartjs.org/docs/latest/
+
+
+//Form Validation: 
+    // example:
+    <input type="text" placeholder="Email" name="Email" ref={register({required: true, pattern: /^\S+@\S+$/i})} />
+    // validation attribute:   ref={register({required: true, pattern: /^\S+@\S+$/i})}
+    // REGEX: 
+        // ALPHA only:  /^[a-z0-9]+$/i 
+        ref={register({required: true, pattern: /^[a-z0-9]+$/ )}
+        // NUMERIC only:     /^[0-9]+$/
+        ref={register({required: true, pattern: /^[0-9]+$/})} 
+
+   
+    
