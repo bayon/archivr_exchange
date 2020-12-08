@@ -34,3 +34,7 @@ docker exec -it <container> /bin/bash  THEN run npm update from inside the conta
 
 // exchange rate history: last month
  https://api.exchangeratesapi.io/history?start_at=2020-11-01&end_at=2020-12-01&symbols=USD,CAD&base=USD
+
+
+//charts: 
+https://www.chartjs.org/docs/latest/
