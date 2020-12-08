@@ -5,11 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import { Flex } from './FlexComponent';
-//import MyChart from './MyChart'; 
-// import MultipleAxes from './MultipleAxes';
-import MegaChart from './megachart/MegaChart'
-// import SimpleChart from './SimpleChart';
-import BarChart from './BarChart';
+import ExchangeChart from './ExchangeChart';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,6 +69,8 @@ function Compare(props) {
   const [finalAmount, setFinalAmount] = useState(0);
   var [from,setFrom] = useState("")
   var [to,setTo] = useState("")
+
+  const [chartData,setChartData] = useState({})
   console.log("...- - compare props:",props)
 
   //setFrom(props.from);
@@ -87,6 +85,7 @@ function Compare(props) {
     if (!compareRatesLoaded) {
       fetchDataJSON(merged).then((data) => {
         console.log(' comparison data:', data);
+        setChartData(data)
        // console.log("compare props from state:",from,to)
        // console.log('merged:',merged)
         
@@ -135,9 +134,9 @@ function Compare(props) {
           </Flex>
         </form>
         
-       <MegaChart></MegaChart>
-       {/* <SimpleChart></SimpleChart> */}
-       <BarChart></BarChart>
+       
+       
+       <ExchangeChart currentChartData={chartData}></ExchangeChart>
       </Paper>
     </Grid>
   );
