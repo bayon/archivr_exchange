@@ -1,6 +1,52 @@
+
+
+
+# Archivr Code Exercise
+//=================== 
+
+Directions: 
+
+
+Create a simple web application for performing currency conversions.  Your app should allow the user to select two 
+currencies, enter an amount in one of the currencies, and see what the value would be in the other currency.  
+For example, I should be able to choose USD and GBP, enter 100 for USD, and see a conversion value like 114.21 GBP
+As a bonus, it would be nice if the user could see a historical view of the chosen exchange rate.  That could be in 
+the form of a chart, or a table, or whatever you prefer.
+You can use one of the many publicly available APIs to look up the exchange rates.  (https://exchangeratesapi.io 
+and https://fixer.io are both good options.)
+Please use React to build the UI.  Other than that, feel free to use any libraries & tools that you like.
+
+//====================== 
+
+app and api in docker container: 
+reference: https://github.com/mrcoles/node-react-docker-compose
+
+
+//======================
+To calculate how much of a foreign currency you’ll get with a particular exchange rate, 
+divide the amount of money you’re starting with by the exchange rate. 
+
+
+//======================
+Rates are quoted against the Euro by default. 
+Quote against a different currency by setting the base parameter in your request.
+GET https://api.exchangeratesapi.io/latest?base=USD HTTP/1.1 
+
+
+
+// UPDATE NPM PACKAGES: 
+run npm install on the app container after running docker-compose up 
+ 
+
+### I used the following repo as a starting point.
+
 # Node + Create React App + Docker Compose
 
 A project that runs a Node server and a create-react-app app via two separate containers, using Docker Compose.
+
+
+
+
 
 ## Development
 
