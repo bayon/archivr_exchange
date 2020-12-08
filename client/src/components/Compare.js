@@ -124,13 +124,8 @@ function Compare(props) {
               <FormLabel>Compare:</FormLabel>
               <input type="submit" value=">"></input>
             </FormSection>
-            <FormSection>
-              {errors.exampleRequired && <span>This field is required</span>}
-            </FormSection>
-            <FormSection>
-              <FormLabel>Result:</FormLabel>
-              <div>{finalAmount} </div>
-            </FormSection>
+            
+            
           </Flex>
         </form>
         

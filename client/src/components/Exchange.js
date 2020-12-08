@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 import { Flex } from './FlexComponent';
 
-import Compare from './Compare'; 
+import Compare from './Compare';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,12 +18,12 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
- 
+
 const FormLabel = styled.section`
   margin-bottom: 10px;
   text-align: left;
 `;
- 
+
 const FormSection = styled.section`
   margin: 15px;
 `;
@@ -40,7 +40,7 @@ async function fetchDataJSON() {
     arrayOfRates.push(obj);
   }
   arrayOfRates.sort(compareExchangeRates);
-   console.log('arrayOfRates:', arrayOfRates);
+  //console.log('arrayOfRates:', arrayOfRates);
   return arrayOfRates;
 }
 
@@ -58,34 +58,29 @@ function compareExchangeRates(a, b) {
   return comparison;
 }
 
-
-
 function Exchange() {
   const classes = useStyles();
 
-  const { register, handleSubmit,   errors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const [finalAmount, setFinalAmount] = useState(0);
-  const [fromSymbol,setFromSymbol] = useState("")
-  const [toSymbol,setToSymbol] = useState("")
-
+  const [fromSymbol, setFromSymbol] = useState('');
+  const [toSymbol, setToSymbol] = useState('');
 
   const onSubmit = (formdata) => {
-    console.log(formdata);
-     const amount = parseFloat(formdata.amount1);
+    //console.log(formdata);
+    const amount = parseFloat(formdata.amount1);
     const currFrom = parseFloat(formdata.currencyFrom);
     const currTo = parseFloat(formdata.currencyTo);
     const exchangeRate = currTo / currFrom;
     const this_final = amount * exchangeRate;
     setFinalAmount(this_final);
 
-    const sel1 = document.getElementById("currencyFrom"); 
+    const sel1 = document.getElementById('currencyFrom');
     let fromSymbol = sel1.options[sel1.selectedIndex].text;
-    setFromSymbol(fromSymbol)
-    const sel2 = document.getElementById("currencyTo"); 
+    setFromSymbol(fromSymbol);
+    const sel2 = document.getElementById('currencyTo');
     let toSymbol = sel2.options[sel2.selectedIndex].text;
-    setToSymbol(toSymbol)
-
-
+    setToSymbol(toSymbol);
   };
 
   var [ratesLoaded, setRatesLoaded] = useState(false);
@@ -94,7 +89,7 @@ function Exchange() {
   if (!ratesLoaded) {
     fetchDataJSON().then((data) => {
       console.log('data:', data);
-     
+
       var options = data.map((obj) => (
         <option key={obj.value} value={obj.value}>
           {obj.key}
@@ -146,8 +141,7 @@ function Exchange() {
           </Flex>
         </form>
       </Paper>
-      <Compare from={fromSymbol} to={toSymbol}/>
-     
+      <Compare from={fromSymbol} to={toSymbol} />
     </Grid>
   );
 }
